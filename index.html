@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZION SMP</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #121212;
+      color: white;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      margin: 30px 0 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.5fr 3fr 1fr;
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .logo-ip-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 300px;
+    }
+
+    .logo-box {
+      background-color: #1e1e1e;
+      border-radius: 20px;
+      padding: 0;
+      flex-grow: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .logo-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .logo-box img, .store-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      display: block;
+      image-rendering: auto;
+      pointer-events: none;
+    }
+
+    .ip-card {
+      background-color: #1e1e1e;
+      border-radius: 20px;
+      padding: 15px;
+      margin-top: 10px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      color: white;
+      font-size: 1.1em;
+      font-weight: 700; /* deixa o texto mais grosso */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .ip-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      background-color: #292929;
+    }
+    /* Texto que aparece ao passar mouse no IP */
+    .ip-card:hover::after {
+      content: "COPY TO CLIPBOARD";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      color: black;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-size: 0.8em;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .store-card {
+      background-color: #1e1e1e;
+      border-radius: 20px;
+      height: 300px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .store-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .store-card:hover::after {
+      content: "GO TO STORE";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      color: black;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-size: 0.8em;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .discord-card {
+      background-color: #1e1e1e;
+      border-radius: 20px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: white;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .discord-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    /* Texto que aparece ao passar mouse no Discord */
+    .discord-card:hover::after {
+      content: "JOIN THE DISCORD";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      color: black;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-size: 0.8em;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .hover-grow {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .copy-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #66ccff;
+      color: #121212;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+      user-select: none;
+    }
+
+    @media (max-width: 960px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .store-card {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .store-card {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ZION SMP</h1>
+
+  <div class="grid">
+
+    <!-- Logo + IP -->
+    <div class="logo-ip-wrapper">
+      <div class="logo-box hover-grow" onclick="location.reload();">
+        <img 
+          src="zionsmp.png" 
+          srcset="zionsmp.png 1x, zionsmp@2x.png 2x" 
+          alt="Logo Zion SMP" 
+          loading="lazy"
+        />
+      </div>
+      <div class="ip-card hover-grow" onclick="copyIP()">
+        ZIONSMP.SRVMC.COM
+      </div>
+    </div>
+
+    <!-- Store Card -->
+    <div class="store-card hover-grow">
+      <img 
+        src="store.png" 
+        srcset="store.png 1x, store@2x.png 2x" 
+        alt="Logo da Loja" 
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Discord Card -->
+    <a href="https://discord.gg/7h2cKQR9X2" target="_blank" rel="noopener noreferrer" class="discord-card hover-grow">
+      <img src="64057340-9ed8-498b-9c29-cf009efcffb8.png" alt="Discord Icon" style="width: 60px; margin-bottom: 20px;" />
+      <h2 style="font-size: 2.5em; margin: 0;">DISCORD</h2>
+      <p style="display: flex; align-items: center; gap: 6px; color: #b0b0b0; margin-top: 5px; font-size: 1em;">
+        <span style="width: 10px; height: 10px; background-color: #43b581; border-radius: 50%; display: inline-block;"></span>
+        Discord Members
+      </p>
+    </a>
+
+  </div>
+
+  <div class="footer" style="text-align:center; padding: 30px; color: #888;">
+    © 2025 ZION SMP - Todos os direitos reservados.
+  </div>
+  <div class="footer" style="text-align:center; padding: 30px; color: #888;">
+    made by Mavykkj
+  </div>
+
+  <script>
+    function copyIP() {
+      const ip = "zionsmp.srvmc.com";
+      navigator.clipboard.writeText(ip).then(() => {
+        const msg = document.createElement('div');
+        msg.className = "copy-notification";
+        msg.innerText = "✅ IP copiado: " + ip;
+        document.body.appendChild(msg);
+        setTimeout(() => msg.remove(), 2500);
+      }).catch(err => {
+        alert("Erro ao copiar IP: " + err);
+      });
+    }
+  </script>
+
+</body>
+</html>
